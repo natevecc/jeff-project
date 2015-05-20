@@ -1,0 +1,47 @@
+DEPENDENCIES
+  apt
+  build-essential
+  database
+  git
+  jeff-project
+    path: .
+    metadata: true
+  nvm
+  postgresql
+  vim
+
+GRAPH
+  apt (2.7.0)
+  build-essential (2.2.3)
+  chef-sugar (3.1.0)
+  chef_handler (1.1.8)
+  database (4.0.6)
+    postgresql (>= 1.0.0)
+  dmg (2.2.2)
+  git (4.2.2)
+    build-essential (>= 0.0.0)
+    dmg (>= 0.0.0)
+    windows (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  jeff-project (0.1.0)
+    apt (>= 0.0.0)
+    build-essential (>= 0.0.0)
+    database (>= 0.0.0)
+    git (>= 0.0.0)
+    nvm (>= 0.0.0)
+    postgresql (>= 0.0.0)
+    vim (>= 0.0.0)
+  nvm (0.1.0)
+    git (>= 2.1.0)
+  openssl (4.0.0)
+    chef-sugar (>= 0.0.0)
+  postgresql (3.4.18)
+    apt (>= 1.9.0)
+    build-essential (>= 0.0.0)
+    openssl (~> 4.0.0)
+  vim (1.1.2)
+  windows (1.37.0)
+    chef_handler (>= 0.0.0)
+  yum (3.6.0)
+  yum-epel (0.6.0)
+    yum (~> 3.0)

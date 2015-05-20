@@ -1,0 +1,19 @@
+{
+  "name": "jeff-project",
+  "version": "0.1.0",
+  "description": "A sample application involving Angular, Express, Sequelize, Gulp and Vagrant",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natevecc/jeff-project.git"
+  },
+  "author": "natevecc@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/natevecc/jeff-project/issues"
+  },
+  "homepage": "https://github.com/natevecc/jeff-project#readme"
+}
