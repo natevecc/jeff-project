@@ -3,12 +3,13 @@ include_recipe "git"
 include_recipe "vim"
 
 # install nvm and node
-include_recipe "nvm"
-nvm_install "v0.12.3"  do
-    from_source true
-    alias_as_default true
-    action :create
-end
+node.default["nodejs"]["version"] = "0.12.2"
+default['nodejs']['binary']['checksum']['linux_x64'] = '4e1578efc2a2cc67651413a05ccc4c5d43f6b4329c599901c556f24d93cd0508'
+include_recipe "nodejs::nodejs_from_source"
+nodejs_npm "gulp"
+nodejs_npm "coffee-script"
+
+# install gulp
 
 # install postgres and set up easy access for the dev environment
 include_recipe "postgresql"

@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/natevecc/jeff-project/issues"
   },
-  "homepage": "https://github.com/natevecc/jeff-project#readme"
+  "homepage": "https://github.com/natevecc/jeff-project#readme",
+  "dependencies": {
+    "express": "^4.12.4"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.2",
+    "gulp": "^3.8.11",
+    "gulp-coffee": "^2.3.1"
+  }
 }

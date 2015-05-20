@@ -5,7 +5,7 @@ metadata
 cookbook 'apt'
 cookbook 'git'
 cookbook 'build-essential'
-cookbook 'nvm'
+cookbook 'nodejs'
 cookbook 'vim'
 cookbook 'postgresql'
 cookbook 'database'
