@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "jeff-dev",
+    "password": null,
+    "database": "nate_vecchiarelli",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

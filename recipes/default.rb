@@ -38,3 +38,14 @@ postgresql_database_user 'jeff-dev' do
   privileges [:all]
   action :create
 end
+
+postgresql_database 'nate_vecchiarelli' do
+  connection(
+    :host      => '127.0.0.1',
+    :port      => node['postgresql']['config']['port'],
+    :username  => 'postgres',
+    :password  => node['postgresql']['password']['postgres']
+  )
+  action :create
+  owner 'jeff-dev'
+end
