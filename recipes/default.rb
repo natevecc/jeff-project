@@ -4,8 +4,8 @@ include_recipe "vim"
 
 # install nvm and node
 node.default["nodejs"]["version"] = "0.12.2"
-default['nodejs']['binary']['checksum']['linux_x64'] = '4e1578efc2a2cc67651413a05ccc4c5d43f6b4329c599901c556f24d93cd0508'
-include_recipe "nodejs::nodejs_from_source"
+node.default['nodejs']['binary']['checksum']['linux_x64'] = '4e1578efc2a2cc67651413a05ccc4c5d43f6b4329c599901c556f24d93cd0508'
+include_recipe "nodejs::nodejs_from_binary"
 nodejs_npm "gulp"
 nodejs_npm "coffee-script"
 
