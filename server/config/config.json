@@ -4,6 +4,12 @@
     "password": null,
     "database": "nate_vecchiarelli",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "define": {
+      "timestamps": true,
+      "paranoid": true,
+      "underscored": true
+    },
+    "coffee": true
   }
 }

@@ -6,52 +6,41 @@ errFn = (res)->
   (err) ->
     res.json err
       .status 500
-    return
 
 router.post '/', (req, res) ->
-  models.User.create(req.body)
-  .then (newUser) ->
-    res.json newUser
-    return
+  console.log "here"
+  console.log req.body
+  models.user.create(req.body)
+  .then (newuser) ->
+    res.json newuser
   , errFn res
-  return
 
 router.get '/', (req, res) ->
-  models.User.findAll()
+  models.user.findAll()
   .then (users) ->
     res.json users
-    return
   , errFn res
-  return
 
 router.get '/:id', (req, res) ->
-  models.User.find(
-    where: 
-      id: req.params.id
-  )
+  models.user.findById(req.params.id)
   .then (user) ->
     if user?
       res.json user
     else
-      res.status 404  
-    return
+      res.status 404
+      .end()
   , errFn res
-  return
 
 router.delete '/:id', (req, res) ->
-  models.User.find(
-    where: 
-      id: req.params.id
-  )
+  models.user.findById(req.params.id)
   .then (user) ->
-    if user?
-      user.destroy() .then ->
-        res.status 204
-        return
-      , errFn res
-    else
-      res.status 404
+    user.destroy() .then ->
+      res.status 204
+      .end()
+    , errFn res
     return
-  return
+  , (err) ->
+    res.status 404
+    .end()
 
 module.exports = router

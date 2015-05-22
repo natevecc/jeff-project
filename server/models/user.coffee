@@ -1,7 +1,4 @@
 module.exports = (sequelize, DataTypes) ->
-  sequelize.define('User',
+  sequelize.define('user',
     email: DataTypes.STRING
-  ,  
-    timestamps: true
-    paranoid: true
   )

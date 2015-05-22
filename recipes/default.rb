@@ -8,6 +8,7 @@ node.default['nodejs']['binary']['checksum']['linux_x64'] = '4e1578efc2a2cc67651
 include_recipe "nodejs::nodejs_from_binary"
 nodejs_npm "gulp"
 nodejs_npm "coffee-script"
+nodejs_npm "sequelize-cli"
 
 # install gulp
 
