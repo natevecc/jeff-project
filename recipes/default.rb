@@ -9,6 +9,7 @@ include_recipe "nodejs::nodejs_from_binary"
 nodejs_npm "gulp"
 nodejs_npm "coffee-script"
 nodejs_npm "sequelize-cli"
+nedejs_npm "mocha"
 
 # install gulp
 
@@ -42,10 +43,10 @@ end
 
 postgresql_database 'nate_vecchiarelli' do
   connection(
-    :host      => '127.0.0.1',
-    :port      => node['postgresql']['config']['port'],
-    :username  => 'postgres',
-    :password  => node['postgresql']['password']['postgres']
+    :host => '127.0.0.1',
+    :port => node['postgresql']['config']['port'],
+    :username => 'postgres',
+    :password => node['postgresql']['password']['postgres']
   )
   action :create
   owner 'jeff-dev'

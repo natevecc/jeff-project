@@ -1,4 +1,6 @@
 models = require '../models'
+Promise = require 'bluebird'
+bcrypt = Promise.promisifyAll require('bcrypt')
 express = require 'express'
 router = express.Router()
 
@@ -8,11 +10,15 @@ errFn = (res)->
       .status 500
 
 router.post '/', (req, res) ->
-  console.log "here"
-  console.log req.body
-  models.user.create(req.body)
-  .then (newuser) ->
-    res.json newuser
+  newUser = req.body
+  bcrypt.genSalt(10)
+  .then (salt) ->
+    bcrypt.hashAsync(newUser.password, salt, null)
+  .then (password) ->
+    newUser.password = password
+    models.user.create(newUser)
+  .then (createdUser) ->
+    res.json createdUser
   , errFn res
 
 router.get '/', (req, res) ->

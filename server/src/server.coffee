@@ -7,8 +7,9 @@ logger = require 'morgan'
 routes = require './routes/index'
 users = require './routes/users'
 
-app = module.exports = express()
+app = express()
 
+# set up 
 app.set 'views', __dirname + '/views'
 app.engine 'html', require('ejs').renderFile
 app.set 'view engine', 'html'
@@ -22,9 +23,4 @@ app.use express.static(path.resolve(__dirname + '/../client'))
 app.use('/', routes)
 app.use('/api/users', users)
 
-server = app.listen(3000, ->
-  host = server.address().address
-  port = server.address().port
-  console.log 'jeff-project listening at http://%s:%s', host, port
-  return
-)
+module.exports = app

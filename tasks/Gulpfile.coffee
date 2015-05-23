@@ -3,6 +3,8 @@ gls = require 'gulp-live-server'
 browserify = require 'browserify'
 ngHtml2Js = require 'browserify-ng-html2js'
 source = require 'vinyl-source-stream'
+gulpMocha = require 'gulp-mocha'
+gutil = require 'gulp-util'
 
 gulp.task 'default', ['serve'], ->
 
@@ -13,8 +15,8 @@ gulp.task 'serve', ->
   # Restart the server when file changes 
   gulp.watch [
     'app.js'
-    'server/**/*.coffee'
-  ], [ server.run ]
+    'server/src/**/*.coffee'
+  ], [ server.start ]
   return
 
 gulp.task 'browserify', ->
@@ -28,3 +30,11 @@ gulp.task 'browserify', ->
   .bundle()
   .pipe source 'main.js'
   .pipe gulp.dest 'client/dist'
+
+gulp.task 'mocha', ->
+  gulp.src('server/test/**/*.coffee', {read: false})
+  .pipe(gulpMocha())
+  .on 'error', gutil.log
+
+gulp.task 'watch-mocha', ->
+  gulp.watch ['../server/src/**/*.coffee', '../server/test/**/*.coffee'], ['mocha']
