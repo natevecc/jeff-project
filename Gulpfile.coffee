@@ -10,9 +10,8 @@ watch = require 'gulp-watch'
 plumber = require 'gulp-plumber'
 batch = require 'gulp-batch'
 
-gulp.task 'default', ['serve']
+gulp.task 'default', ['serve'], ->
 
-# server stuff
 gulp.task 'serve', ->
   # Start the server at the beginning of the task 
   server = gls.new('app.js')
@@ -21,13 +20,9 @@ gulp.task 'serve', ->
   gulp.watch [
     'app.js'
     'server/src/**/*.coffee'
-  ], 
-  [ 
-    server.start
-  ]
+  ], [ server.start ]
   return
 
-# client stuff
 gulp.task 'browserify', ->
   b = browserify
     entries: ['client/app.coffee'],
@@ -40,7 +35,6 @@ gulp.task 'browserify', ->
   .pipe source 'main.js'
   .pipe gulp.dest 'client/dist'
 
-# server testing stuff
 onError = (err) ->
   console.log err.toString()
   @emit 'end'

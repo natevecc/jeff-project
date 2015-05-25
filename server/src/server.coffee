@@ -2,25 +2,41 @@ express = require 'express'
 path = require 'path'
 bodyParser = require 'body-parser'
 logger = require 'morgan'
+espressSession = require 'express-session'
+#cookieParser = require 'cookie-parser'
 
-# loud routers
+# load routers
 routes = require './routes/index'
 users = require './routes/users'
+sessions = require './routes/sessions'
 
-app = express()
+# load services
+auth = require './services/authentication'
+
+server = express()
 
 # set up 
-app.set 'views', __dirname + '/views'
-app.engine 'html', require('ejs').renderFile
-app.set 'view engine', 'html'
+server.set 'views', __dirname + '/views'
+server.engine 'html', require('ejs').renderFile
+server.set 'view engine', 'html'
 
-app.use logger('dev')
-app.use(bodyParser.json
+server.use logger('dev')
+server.use(bodyParser.json
   type: 'application/json'
 )
-app.use express.static(path.resolve(__dirname + '/../client'))
+#server.use cookieParser()
+server.use express.static(path.resolve(__dirname + '/../client'))
 
-app.use('/', routes)
-app.use('/api/users', users)
+server.use espressSession(
+  secret: 'superSecretSSSHHHH' # TODO: make configurable
+  resave: false
+  saveUninitialized: false
+)
+server.use auth.initialize()
+server.use auth.session()
 
-module.exports = app
+server.use('/', routes)
+server.use('/api/users', users)
+server.use('/sessions', sessions)
+
+module.exports = server

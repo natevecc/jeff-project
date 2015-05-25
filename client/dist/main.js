@@ -26317,7 +26317,7 @@ var angular;
 
 angular = require('angular');
 
-angular.module("jeff-app", []).controller("test", function() {
+module["export"] = angular.module("jeff-app", []).controller("test", function() {
   this.name = "tester";
   return this.value = "theValue";
 });

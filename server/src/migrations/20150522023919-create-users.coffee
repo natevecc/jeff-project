@@ -9,6 +9,7 @@ module.exports =
         type: Sequelize.STRING
         defaultValue: false
         allowNull: false
+        unique: true
       password: 
         type: Sequelize.STRING(60)
         defaultValue: false
