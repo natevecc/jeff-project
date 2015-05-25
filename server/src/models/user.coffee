@@ -1,4 +1,4 @@
-
+_ = require 'lodash'
 
 module.exports = (sequelize, DataTypes) ->
   sequelize.define('user',
@@ -6,13 +6,18 @@ module.exports = (sequelize, DataTypes) ->
       type: DataTypes.STRING
       validate:
         isEmail: true
-        notNull: true
         notEmpty: true
     password: 
       type: DataTypes.STRING(60)
       validate:
-        isAlphanumeric: true
-        notNull: true
         notEmpty: true
-      toJson: false
+  ,
+    instanceMethods: 
+      toJSON: ->
+        obj = this.get
+          plain: true
+        clone = _.clone(obj, true) 
+        delete clone.password
+        delete clone.deletedAt
+        clone
   )

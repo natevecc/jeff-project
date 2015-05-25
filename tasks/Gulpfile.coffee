@@ -3,8 +3,12 @@ gls = require 'gulp-live-server'
 browserify = require 'browserify'
 ngHtml2Js = require 'browserify-ng-html2js'
 source = require 'vinyl-source-stream'
-gulpMocha = require 'gulp-mocha'
+bcrypt = require 'bcrypt' # this is here so the tests watch will work: https://github.com/sindresorhus/gulp-mocha/issues/86
+mocha = require 'gulp-mocha'
 gutil = require 'gulp-util'
+watch = require 'gulp-watch'
+plumber = require 'gulp-plumber'
+batch = require 'gulp-batch'
 
 gulp.task 'default', ['serve'], ->
 
@@ -31,10 +35,22 @@ gulp.task 'browserify', ->
   .pipe source 'main.js'
   .pipe gulp.dest 'client/dist'
 
-gulp.task 'mocha', ->
-  gulp.src('server/test/**/*.coffee', {read: false})
-  .pipe(gulpMocha())
-  .on 'error', gutil.log
+onError = (err) ->
+  console.log err.toString()
+  @emit 'end'
 
-gulp.task 'watch-mocha', ->
-  gulp.watch ['../server/src/**/*.coffee', '../server/test/**/*.coffee'], ['mocha']
+gulp.task 'mocha', ->
+  gulp.src(['server/test/**/*.coffee'], read: false)
+  .pipe mocha()
+  .on 'error', onError
+
+gulp.task 'test', ['mocha'], ->  
+  gulp.watch(
+    [
+      'server/src/**/*.coffee'
+      'server/test/**/*.coffee'
+    ]
+    ['mocha']
+  )
+
+  
