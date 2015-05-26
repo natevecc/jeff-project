@@ -8,10 +8,10 @@ An sample application involving Angular, Express, Sequelize, Gulp and Vagrant
 ### Install Dev environment dependencies
  - Virtual Box
    - [download](https://www.virtualbox.org/wiki/Downloads) and install
-   - or on a mac with [homebrew](http://brew.sh/): `brew install virtualbox`
+   - or on a mac with [homebrew](http://brew.sh/): `brew install caskroom/cask/brew-cask` then `brew cask install virtualbox`
  - Vagrant
    - [download](https://www.vagrantup.com/downloads.html) and install
-   - or `brew install vagrant`
+   - or `brew cask install vagrant`
  - Vagrant Berkshelf plugin
    - `vagrant plugin install vagrant-berkshelf`
  - Vagrant Omnibus plugin
