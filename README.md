@@ -16,6 +16,9 @@ An sample application involving Angular, Express, Sequelize, Gulp and Vagrant
    - `vagrant plugin install vagrant-berkshelf`
  - Vagrant Omnibus plugin
    - `vagrant plugin install vagrant-omnibus`
+ - Chef Development Kit
+   - [download](https://downloads.chef.io/chef-dk/) and install
+   - this might not be needed if you don't plan on changing the chef files but leaving here to be safe
 
 ### Setup Dev Box
  After cloning the repository cd into it and run vagrant up: `cd /jeff-app` `vagrant up`
