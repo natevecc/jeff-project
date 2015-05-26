@@ -9,7 +9,7 @@ include_recipe "nodejs::nodejs_from_binary"
 nodejs_npm "gulp"
 nodejs_npm "coffee-script"
 nodejs_npm "sequelize-cli"
-nedejs_npm "mocha"
+nodejs_npm "mocha"
 
 # install gulp
 
