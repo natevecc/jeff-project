@@ -4,32 +4,25 @@ module.exports = class Login
     '$http'
     '$rootScope'
     '$state'
+    'authentication'
   ]
-  constructor: (@$http, @$rootScope, @$state) ->
+  constructor: (@$http, @$rootScope, @$state, @authentication) ->
     @alert =
       type: "danger"
       msg: ""
       show: false
 
-  login: (username, password) ->
-    @$http.post('/api/sessions', {email: username, password: password})
-    .then (res) =>
-      # success and redirect to root
-      @$rootScope.loggedIn = true
-      @$state.go('home')
+  login: (email, password) ->
+    @authentication.login(email, password)
     .catch (err) =>
       # show login error popup
-      @alert.msg = "Error during login"
+      @alert.msg = "Error during login: #{err.data.error}"
       @alert.show = true
-      @$rootScope.loggedIn = false
+      @$rootScope.user = null
 
-  register: (username, password) ->
-    @$http.post('/api/users', {email: username, password: password})
-    .then (res) =>
-      # success and redirect to root
-      @$rootScope.loggedIn = true
+  register: (email, password) ->
+    @authentication.register(email, password)
     .catch (err) =>
       # show login error popup
-      @alert.msg = "Error during register"
+      @alert.msg = "Error during registration: #{res.data.error}"
       @alert.show = true
-      @$rootScope.loggedIn = false

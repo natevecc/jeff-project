@@ -8,24 +8,23 @@ router.post '/'
 , (req, res, next) ->
   fn = auth.authenticate 'local' 
   , (err, user, info) ->
-    console.log 1
     if err
       return next err
-    console.log 2
     if not user
       return res
-      .status 404
+      .status 400
       .json
         error: info.message
     req.login user, (err) ->
       if err
         return next err
-      res
-      .status 200
-      .end()
+      res.json user
   fn(req, res, next)
 
 router.delete '/', (req, res) ->
   req.logout()
+  res
+  .status 204
+  .end()
 
 module.exports = router
