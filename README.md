@@ -27,4 +27,4 @@ An sample application involving Angular, Express, Sequelize, Gulp and Vagrant
  
  Use `vagarnt ssh` to log onto the machine
  
- `cd /vagrant` to get to the code and `gulp` to start the server which you can reach by navigating to `localhost:3000` from your browser.
+ `cd /vagrant` to get to the code then run `sequelize db:migrate` to create the needed database tables and `gulp` to start the server which you can reach by navigating to `localhost:3000` from your browser.
