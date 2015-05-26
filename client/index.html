@@ -26,10 +26,10 @@
           <a class="navbar-brand" href="#">Jeff-App</a>
         </div>
         <div ng-hide="nav.$rootScope.user" class="btn-group btn-default navbar-btn navbar-right">
-          <a class="btn" ui-sref="login">Login</a>
+          <a class="btn btn-default" ui-sref="login">Login</a>
         </div>
         <div ng-show="nav.$rootScope.user" class="btn-group btn-default navbar-btn navbar-right">
-          <a class="btn" ng-click="nav.authentication.logout()">Logout</a>
+          <a class="btn btn-default" ng-click="nav.authentication.logout()">Logout</a>
         </div>
       </div><!-- /.container-fluid -->
     </nav>
