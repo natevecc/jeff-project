@@ -3,7 +3,7 @@ Promise = require 'bluebird'
 bcrypt = Promise.promisifyAll require('bcrypt')
 express = require 'express'
 router = express.Router()
-authMiddleware = require('../services/authentication').authMiddleware
+auth = require('../services/authentication')
 
 errFn = (res)->
   (err) ->
@@ -16,7 +16,7 @@ errFn = (res)->
 router.use (req, res, next) ->
   if req.method is "POST"
     return next()
-  authMiddleware(req, res, next)
+  auth.authMiddleware(req, res, next)
 
 router.post '/', (req, res) ->
   newUser = req.body
@@ -27,9 +27,12 @@ router.post '/', (req, res) ->
     newUser.password = password
     models.user.create(newUser)
   .then (createdUser) ->
-    res
-    .status 201
-    .json createdUser
+    req.login createdUser, (err) ->
+      if err 
+        return next(err)
+      res
+      .status 201
+      .json createdUser
   .catch errFn(res)
 
 router.get '/', (req, res) ->

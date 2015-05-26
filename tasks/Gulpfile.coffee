@@ -30,13 +30,14 @@ gulp.task 'serve', ->
   # Restart the server when file changes 
 
   gulp.watch [
-    'client/dist/bundle.js'
+    'client/dist/main.js'
+    'client/dist/main.css'
     'client/index.html'
   ], server.notify
   gulp.watch [
     'app.js'
     'server/src/**/*.coffee'
-  ], [ server.start ]
+  ], server.start
 
 # server testing stuff
 onError = (err) ->

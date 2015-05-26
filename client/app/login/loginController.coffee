@@ -1,12 +1,35 @@
 
 module.exports = class Login
-  constructor: (@$http) ->
+  @$inject = [
+    '$http'
+    '$rootScope'
+    '$state'
+  ]
+  constructor: (@$http, @$rootScope, @$state) ->
+    @alert =
+      type: "danger"
+      msg: ""
+      show: false
 
   login: (username, password) ->
-    $http.post('/api/sessions', {username: username, password: password})
-    .then (res) ->
+    @$http.post('/api/sessions', {email: username, password: password})
+    .then (res) =>
       # success and redirect to root
-      console.log 1
-    .catch (err) ->
+      @$rootScope.loggedIn = true
+      @$state.go('home')
+    .catch (err) =>
       # show login error popup
-      console.log 2
+      @alert.msg = "Error during login"
+      @alert.show = true
+      @$rootScope.loggedIn = false
+
+  register: (username, password) ->
+    @$http.post('/api/users', {email: username, password: password})
+    .then (res) =>
+      # success and redirect to root
+      @$rootScope.loggedIn = true
+    .catch (err) =>
+      # show login error popup
+      @alert.msg = "Error during register"
+      @alert.show = true
+      @$rootScope.loggedIn = false

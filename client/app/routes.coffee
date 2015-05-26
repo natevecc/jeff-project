@@ -9,12 +9,15 @@ module.exports = [
     $urlRouterProvider.otherwise("/login");
 
     $stateProvider
+
     .state 'home',
       url: '/'
       controller: 'homeController'
+      controllerAs: 'home'
       templateUrl: '/home/home.html'
     .state 'login',
       url: '/login'
       controller: 'loginController'
+      controllerAs: 'login'
       templateUrl: '/login/login.html'
   ]

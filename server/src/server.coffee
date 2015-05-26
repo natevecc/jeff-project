@@ -35,8 +35,10 @@ server.use espressSession(
 server.use auth.initialize()
 server.use auth.session()
 
-server.use('/', routes)
+#server.use('/', routes)
 server.use('/api/users', users)
-server.use('/sessions', sessions)
+server.use('/api/sessions', sessions)
+
+server.use(routes)
 
 module.exports = server
