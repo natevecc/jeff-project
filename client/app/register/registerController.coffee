@@ -1,5 +1,5 @@
 
-module.exports = class Login
+module.exports = class Register
   @$inject = [
     '$state'
     'authentication'
@@ -10,10 +10,14 @@ module.exports = class Login
       msg: ""
       show: false
 
-  login: (email, password) ->
-    @authentication.login(email, password)
+    @validRoles = [
+      'viewer'
+      'admin'
+    ]
+
+  register: (options) ->
+    @authentication.register(options)
     .catch (err) =>
       # show login error popup
-      @alert.msg = "Error during login: #{err.data.error}"
+      @alert.msg = "Error during registration: #{res.data.error}"
       @alert.show = true
-      @$rootScope.user = null

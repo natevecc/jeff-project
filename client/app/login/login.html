@@ -1,10 +1,10 @@
 <form class="form-signin" _lpchecked="1">
-<alert ng-show="login.alert.show" type="{{login.alert.type}}" close="login.alert.show = false">{{login.alert.msg}}</alert>
+  <alert ng-show="login.alert.show" type="{{login.alert.type}}" close="login.alert.show = false">{{login.alert.msg}}</alert>
   <h2 class="form-signin-heading">Please Login</h2>
   <label for="inputEmail" class="sr-only">Email address</label>
   <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off" ng-model="email">
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off" ng-model="password">
   <button class="btn btn-lg btn-primary btn-block" ng-click="login.login(email, password)">Sign in</button>
-  <button class="btn btn-lg btn-primary btn-block" ng-click="login.register(email, password)">Register</button>
+  <a class='btn btn-link' ui-sref='register'>Register</a>
 </form>

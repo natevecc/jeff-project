@@ -1,4 +1,5 @@
 angular = require 'angular'
+modal = require './modal.logout.html'
 
 class Authentication
   @$inject = [
@@ -12,14 +13,14 @@ class Authentication
 
   constructor: (@$rootScope, @$state, @$modal, @$q, @$http, @$cookieStore) ->
     if @$cookieStore.get 'user'
-      @$rootScope.user = angular.toJson(@$cookieStore.get 'user')
+      @$rootScope.user = angular.fromJson(@$cookieStore.get 'user')
       @$state.go 'home'
     else
       @$rootScope.user = null
 
     @$rootScope.$on '$stateChangeStart', 
       (event, toState, toParams, fromState, fromParams) =>
-        if not @$rootScope.user and toState.name != 'login'
+        if not @$rootScope.user and not (toState.name is 'login' or toState.name is 'register')
           event.preventDefault()
           @$state.go 'login'
 
@@ -47,8 +48,8 @@ class Authentication
       @$rootScope.user = res.data
       @$state.go('home')
 
-  register: (email, password) ->
-    @$http.post('/api/users', {email: email, password: password})
+  register: (options) ->
+    @$http.post('/api/users', options)
     .then (res) =>
       # success and redirect to root
       @$rootScope.user = res.data

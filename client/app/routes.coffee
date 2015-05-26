@@ -2,7 +2,10 @@ module.exports = [
   '$stateProvider'
   '$urlRouterProvider'
   '$locationProvider'
-  ($stateProvider, $urlRouterProvider, $locationProvider) ->
+  '$httpProvider'
+  ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
+
+    $httpProvider.defaults.withCredentials = true
     
     $locationProvider.html5Mode(true).hashPrefix('!');
 
@@ -20,4 +23,9 @@ module.exports = [
       controller: 'loginController'
       controllerAs: 'login'
       templateUrl: '/login/login.html'
+    .state 'register',
+      url: '/register'
+      controller: 'registerController'
+      controllerAs: 'register'
+      templateUrl: '/register/register.html'
   ]

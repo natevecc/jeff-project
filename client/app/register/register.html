@@ -1,0 +1,19 @@
+<div>
+  <form class="form-signin" _lpchecked="1">
+  <alert ng-show="register.alert.show" type="{{register.alert.type}}" close="register.alert.show = false">{{register.alert.msg}}</alert>
+  <h2 class="form-signin-heading">Register</h2>
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off" ng-model="options.email">
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off" ng-model="options.password">
+  <label for="firstName" class="sr-only">First Name</label>
+  <input type="text" id="firstName" class="form-control" placeholder="First Name" required="" autocomplete="off" ng-model="options.firstName">
+  <label for="lastName" class="sr-only">Last Name</label>
+  <input type="text" id="lastName" class="form-control" placeholder="Last Name" required="" autocomplete="off" ng-model="options.lastName">
+  <label for="role" class="sr-only">Role</label>
+  <select class="form-control" ng-model="options.role" ng-options="role as role for role in register.validRoles">
+
+  </select>
+  <button class="btn btn-lg btn-primary btn-block" ng-click="register.register(options)">Register</button>
+</form>
+</div>

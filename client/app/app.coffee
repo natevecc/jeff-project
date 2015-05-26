@@ -4,6 +4,7 @@ routes = require './routes'
 login = require './login'
 home = require './home'
 navBar = require './navBar'
+register = require './register'
 
 
 module.exports = angular.module("jeff-app", [
@@ -12,5 +13,6 @@ module.exports = angular.module("jeff-app", [
   home.name
   login.name
   navBar.name
+  register.name
 ])
 .config(routes)

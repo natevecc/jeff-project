@@ -36,13 +36,23 @@ router.post '/', (req, res) ->
   .catch errFn(res)
 
 router.get '/', (req, res) ->
+  if req.user.role isnt 'admin'
+    return res
+      .status 401
+      .json
+        error: "Insufficient Permissions"
   models.user.findAll()
   .then (users) ->
-    console.log "LOOK"
     res.json users
   , errFn res
 
 router.get '/:id', (req, res) ->
+  if req.user.role isnt 'admin' or 
+      req.user.id isnt req.params.id
+    return res
+      .status 401
+      .json
+        error: "Insufficient Permissions"
   models.user.findById(req.params.id)
   .then (user) ->
     if user?
@@ -53,6 +63,11 @@ router.get '/:id', (req, res) ->
   , errFn res
 
 router.delete '/:id', (req, res) ->
+  if req.user.role isnt 'admin' 
+    return res
+      .status 401
+      .json
+        error: "Insufficient Permissions"
   models.user.findById(req.params.id)
   .then (user) ->
     user.destroy() .then ->
