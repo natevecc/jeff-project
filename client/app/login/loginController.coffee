@@ -1,17 +1,12 @@
-app = require '../app'
-template require './login.html'
 
-class Login
+module.exports = class Login
   constructor: (@$http) ->
 
   login: (username, password) ->
     $http.post('/api/sessions', {username: username, password: password})
     .then (res) ->
       # success and redirect to root
+      console.log 1
     .catch (err) ->
       # show login error popup
-
-app.controller 'login', [
-  '$http' 
-  Login
-]
+      console.log 2

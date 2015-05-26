@@ -9,8 +9,18 @@ gutil = require 'gulp-util'
 watch = require 'gulp-watch'
 plumber = require 'gulp-plumber'
 batch = require 'gulp-batch'
+watchify = require 'watchify'
+_ = require 'lodash'
+buffer = require 'vinyl-buffer'
+sourcemaps = require 'gulp-sourcemaps'
+sass = require 'gulp-sass'
+concatCss = require 'gulp-concat-css'
 
-gulp.task 'default', ['serve']
+gulp.task 'default', [
+  'browserify'
+  'sass:watch'
+  'serve'
+]
 
 # server stuff
 gulp.task 'serve', ->
@@ -18,27 +28,15 @@ gulp.task 'serve', ->
   server = gls.new('app.js')
   server.start()
   # Restart the server when file changes 
+
+  gulp.watch [
+    'client/dist/bundle.js'
+    'client/index.html'
+  ], server.notify
   gulp.watch [
     'app.js'
     'server/src/**/*.coffee'
-  ], 
-  [ 
-    server.start
-  ]
-  return
-
-# client stuff
-gulp.task 'browserify', ->
-  b = browserify
-    entries: ['client/app.coffee'],
-    extensions: ['.js', '.coffee']
-  .transform 'coffeeify'
-  .transform ngHtml2Js(
-    module: 'templates',
-    baseDir: 'client')
-  .bundle()
-  .pipe source 'main.js'
-  .pipe gulp.dest 'client/dist'
+  ], [ server.start ]
 
 # server testing stuff
 onError = (err) ->
@@ -50,7 +48,7 @@ gulp.task 'mocha', ->
   .pipe mocha()
   .on 'error', onError
 
-gulp.task 'test', ['mocha'], ->  
+gulp.task 'test:server', ['mocha'], ->  
   gulp.watch(
     [
       'server/src/**/*.coffee'
@@ -58,5 +56,47 @@ gulp.task 'test', ['mocha'], ->
     ]
     ['mocha']
   )
+
+# client stuff
+opts = _.assign({}, watchify.args, {
+  entries: ['client/app/app.coffee']
+  extensions: ['.js', '.coffee', '.html']
+  debug: true
+})
+
+# TODO: decuple watchify so we can just call browserify without watch
+b = watchify(browserify(opts), {poll: true})
+.transform 'coffeeify'
+.transform ngHtml2Js(
+  module: 'templates',
+  baseDir: 'client/app')
+
+bundle = ->
+  b.bundle()
+  .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+  .pipe(source('main.js'))
+  .pipe(buffer())
+  .pipe(sourcemaps.init(loadMaps: true))
+  .pipe(sourcemaps.write('./'))
+  .pipe gulp.dest('./client/dist')
+
+gulp.task 'browserify', bundle
+b.on 'update', bundle
+b.on 'log', gutil.log
+
+gulp.task 'sass', ->
+  gulp.src 'client/sass/**/*.sass'
+  .pipe sourcemaps.init()
+  .pipe sass(
+    indentedSyntax: true
+    includePaths: ["node_modules"]
+    ).on 'error', sass.logError
+  .pipe concatCss('./main.css',
+    includePaths: ['node_modules'])
+  .pipe sourcemaps.write()
+  .pipe gulp.dest 'client/dist'
+
+gulp.task 'sass:watch', ['sass'], ->
+  gulp.watch 'client/sass/**/*.sass', ['sass']
 
   

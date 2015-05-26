@@ -25,7 +25,7 @@ server.use(bodyParser.json
   type: 'application/json'
 )
 #server.use cookieParser()
-server.use express.static(path.resolve(__dirname + '/../client'))
+server.use express.static(path.resolve(__dirname + '/../../client'))
 
 server.use espressSession(
   secret: 'superSecretSSSHHHH' # TODO: make configurable

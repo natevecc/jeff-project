@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <script type="text/javascript" src="dist/main.js"></script>
-</head>
-<body ng-app="jeff-app">
-  <div ui-view></div>
-  <div ng-controller="test as t">
-    <h1>Test: {{t.name}}</h1>
-    <p>{{t.value}}</p>
-  </div>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Jeff-App</title>
+
+    <script src="//localhost:35729/livereload.js"></script>
+    <script type="text/javascript" src="dist/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="dist/main.css">
+    <base href="/">
+  </head>
+  <body ng-app="jeff-app">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Jeff-App</a>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div ui-view></div>
+  </body>
 </html>
