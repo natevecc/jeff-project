@@ -19,6 +19,9 @@ An sample application involving Angular, Express, Sequelize, Gulp and Vagrant
 
 ### Setup Dev Box
  After cloning the repository cd into it and run vagrant up: `cd /jeff-app` `vagrant up`
+ 
  Ths will download the vagrant image, start the server and provision it with all of it's dev dependencies
+ 
  Use `vagarnt ssh` to log onto the machine
+ 
  `cd /vagrant` to get to the code and `gulp` to start the server which you can reach by navigating to `localhost:3000` from your browser.
