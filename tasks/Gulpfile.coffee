@@ -6,7 +6,6 @@ source = require 'vinyl-source-stream'
 bcrypt = require 'bcrypt' # this is here so the tests watch will work: https://github.com/sindresorhus/gulp-mocha/issues/86
 mocha = require 'gulp-mocha'
 gutil = require 'gulp-util'
-batch = require 'gulp-batch'
 watchify = require 'watchify'
 _ = require 'lodash'
 buffer = require 'vinyl-buffer'
@@ -108,4 +107,6 @@ gulp.task "build", ['sass'], ->
     module: 'templates',
     baseDir: 'client/app')
   .bundle()
+  .pipe(source('main.js'))
+  .pipe gulp.dest('./client/dist')
   
