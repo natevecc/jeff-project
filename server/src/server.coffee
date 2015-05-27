@@ -15,7 +15,8 @@ auth = require './services/authentication'
 
 server = express()
 
-# set up 
+# set up
+server.set('port', (process.env.PORT || 3000));
 server.set 'views', __dirname + '/views'
 server.engine 'html', require('ejs').renderFile
 server.set 'view engine', 'html'

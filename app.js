@@ -2,7 +2,7 @@ require('coffee-script/register');
 app = require('./server/src/server.coffee');
 
 var server;
-server = app.listen(3000, function() {
+server = app.listen(app.get('port'), function() {
   var host, port;
   host = server.address().address;
   port = server.address().port;
