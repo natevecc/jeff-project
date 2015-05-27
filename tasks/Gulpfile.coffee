@@ -12,8 +12,10 @@ buffer = require 'vinyl-buffer'
 sourcemaps = require 'gulp-sourcemaps'
 sass = require 'gulp-sass'
 concatCss = require 'gulp-concat-css'
+del = require 'del'
 
 gulp.task 'default', [
+  'clean'
   'browserify'
   'sass:watch'
   'serve'
@@ -97,7 +99,7 @@ gulp.task 'sass', ->
 gulp.task 'sass:watch', ['sass'], ->
   gulp.watch 'client/sass/**/*.sass', ['sass']
 
-gulp.task "build", ['sass'], ->
+gulp.task "build", ['clean','sass'], ->
   b = browserify(
     entries: ['client/app/app.coffee']
     extensions: ['.js', '.coffee', '.html']
@@ -109,4 +111,9 @@ gulp.task "build", ['sass'], ->
   .bundle()
   .pipe(source('main.js'))
   .pipe gulp.dest('./client/dist')
+
+gulp.task 'clean', ->
+  del([
+    'client/dist/**/*'
+  ])
   
