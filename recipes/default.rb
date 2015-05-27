@@ -1,4 +1,5 @@
 include_recipe "apt"
+include_recipe 'build-essential::default'
 include_recipe "git"
 include_recipe "vim"
 
