@@ -29,3 +29,5 @@ node_modules
 
 # ignore built javacript files
 client/dist
+
+npm-debug.log
