@@ -22,7 +22,7 @@ gulp.task 'default', [
 # server stuff
 gulp.task 'serve', ->
   # Start the server at the beginning of the task 
-  server = gls.new('app.js')
+  server = gls.new('index.js')
   server.start()
   # Restart the server when file changes 
 
@@ -32,7 +32,7 @@ gulp.task 'serve', ->
     'client/index.html'
   ], server.notify
   gulp.watch [
-    'app.js'
+    'index.js'
     'server/src/**/*.coffee'
   ], server.start
 
