@@ -12,7 +12,6 @@
   <input type="text" id="lastName" class="form-control" placeholder="Last Name" required="" autocomplete="off" ng-model="options.lastName">
   <label for="role" class="sr-only">Role</label>
   <select class="form-control" ng-model="options.role" ng-options="role as role for role in register.validRoles">
-
   </select>
   <button class="btn btn-lg btn-primary btn-block" ng-click="register.register(options)">Register</button>
 </form>

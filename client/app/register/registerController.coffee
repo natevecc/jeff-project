@@ -19,5 +19,5 @@ module.exports = class Register
     @authentication.register(options)
     .catch (err) =>
       # show login error popup
-      @alert.msg = "Error during registration: #{res.data.error}"
+      @alert.msg = "Error during registration: #{err.data.error}"
       @alert.show = true
