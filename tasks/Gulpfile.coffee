@@ -6,8 +6,6 @@ source = require 'vinyl-source-stream'
 bcrypt = require 'bcrypt' # this is here so the tests watch will work: https://github.com/sindresorhus/gulp-mocha/issues/86
 mocha = require 'gulp-mocha'
 gutil = require 'gulp-util'
-watch = require 'gulp-watch'
-plumber = require 'gulp-plumber'
 batch = require 'gulp-batch'
 watchify = require 'watchify'
 _ = require 'lodash'
@@ -100,4 +98,14 @@ gulp.task 'sass', ->
 gulp.task 'sass:watch', ['sass'], ->
   gulp.watch 'client/sass/**/*.sass', ['sass']
 
+gulp.task "build", ['sass'], ->
+  b = browserify(
+    entries: ['client/app/app.coffee']
+    extensions: ['.js', '.coffee', '.html']
+    )
+  .transform 'coffeeify'
+  .transform ngHtml2Js(
+    module: 'templates',
+    baseDir: 'client/app')
+  .bundle()
   

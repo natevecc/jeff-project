@@ -4,7 +4,8 @@
   "description": "A sample application involving Angular, Express, Sequelize, Gulp and Vagrant",
   "main": "server.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "postinstall": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -42,9 +43,7 @@
     "sequelize": "^3.0.1",
     "sequelize-cli": "^1.7.0",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
-  },
-  "devDependencies": {
+    "vinyl-source-stream": "^1.1.0",
     "browserify-ng-html2js": "^1.1.1",
     "coffee-script": "^1.9.2",
     "connect-livereload": "^0.5.3",
@@ -57,5 +56,9 @@
     "gulp-sourcemaps": "^1.5.2",
     "supertest": "^1.0.1",
     "watchify": "^3.2.1"
+  },
+  "engines": {
+    "node": "0.12.2",
+    "npm": "2.7.4"
   }
 }
